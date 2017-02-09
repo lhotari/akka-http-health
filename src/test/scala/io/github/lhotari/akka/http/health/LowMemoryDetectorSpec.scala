@@ -144,7 +144,7 @@ object LeakyApplication {
 
     var retval = 100
 
-    val lowMemoryDetector = new LowMemoryDetector(occupiedHeapPercentageThreshold = 80) {
+    val lowMemoryDetector = new LowMemoryDetector(occupiedHeapPercentageThreshold = 70) {
       override def handleGcNotification(info: GarbageCollectionNotificationInfo): Unit = {
         println(s"GC notification action '${info.getGcAction}' cause '${info.getGcCause}' name '${info.getGcName}' duration ${info.getGcInfo.getDuration}")
         super.handleGcNotification(info)
