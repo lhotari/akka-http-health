@@ -1,6 +1,8 @@
 # Use container-based infrastructure
 sudo: false
 
+language: scala
+
 scala:
   - 2.11.8
   - 2.12.1
