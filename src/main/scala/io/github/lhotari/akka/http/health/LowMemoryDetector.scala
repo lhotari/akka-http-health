@@ -36,15 +36,19 @@ class LowMemoryDetector(val occupiedHeapPercentageThreshold: Int = 90, val gcBea
 
   private lazy val tenuredSpaceGcBeans: Seq[GarbageCollectorMXBean] = findTenuredSpaceGcBeans()
 
-  val gcListener: NotificationListener = (notification: Notification, handback: Any) => {
-    if (GarbageCollectionNotificationInfo.GARBAGE_COLLECTION_NOTIFICATION == notification.getType) {
-      handleGcNotification(GarbageCollectionNotificationInfo.from(notification.getUserData.asInstanceOf[CompositeData]))
+  val gcListener: NotificationListener = new NotificationListener {
+    override def handleNotification(notification: Notification, handback: Any) = {
+      if (GarbageCollectionNotificationInfo.GARBAGE_COLLECTION_NOTIFICATION == notification.getType) {
+        handleGcNotification(GarbageCollectionNotificationInfo.from(notification.getUserData.asInstanceOf[CompositeData]))
+      }
     }
   }
 
-  val memoryListener: NotificationListener = (notification: Notification, handback: Any) => {
-    if (MemoryNotificationInfo.MEMORY_COLLECTION_THRESHOLD_EXCEEDED == notification.getType) {
-      handleMemoryCollectionThresholdExceeded(MemoryNotificationInfo.from(notification.getUserData.asInstanceOf[CompositeData]))
+  val memoryListener: NotificationListener = new NotificationListener {
+    override def handleNotification(notification: Notification, handback: scala.Any) = {
+      if (MemoryNotificationInfo.MEMORY_COLLECTION_THRESHOLD_EXCEEDED == notification.getType) {
+        handleMemoryCollectionThresholdExceeded(MemoryNotificationInfo.from(notification.getUserData.asInstanceOf[CompositeData]))
+      }
     }
   }
 
