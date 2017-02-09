@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/lhotari/akka-http-health.svg?branch=master)](https://travis-ci.org/lhotari/akka-http-health)
+
 # akka-http-health
 
 Library for adding `/health` endpoint checks for Akka Http applications.
