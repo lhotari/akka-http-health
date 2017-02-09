@@ -39,7 +39,7 @@ Pull requests are welcome.
 Some basic guidelines:
 * A few unit tests would help a lot as well - someone has to do that before the PR gets merged.
 * Please rebase the pull request branch against the current master.
-* When writing a commit message please follow [these conventions](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
+* When writing a commit message please follow [these conventions](http://chris.beams.io/posts/git-commit/#seven-rules).
 * If you are fixing an existing issue please add `Fixes gh-XXXX` at the end of the commit message (where `XXXX` is the issue number).
 * Add the license header to each source code file (see existing source code files for an example)
 
