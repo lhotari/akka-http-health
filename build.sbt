@@ -2,9 +2,11 @@ name := "akka-http-health"
 
 organization := "io.github.lhotari"
 
-version := "1.0.0"
+version := "1.0.1"
 
 scalaVersion := "2.12.1"
+
+crossScalaVersions := Seq("2.11.8", scalaVersion.value)
 
 scalacOptions := Seq("-unchecked", "-feature", "-deprecation", "-encoding", "utf8")
 
