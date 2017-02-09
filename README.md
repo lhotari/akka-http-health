@@ -23,12 +23,14 @@ libraryDependencies += "io.github.lhotari" %% "akka-http-health" % "1.0.0"
 
 #### Simple use
 
-Append the route instance created with `io.github.lhotari.akka.http.health.HealthEndpoint.createDefaultHealthRoute()` to your main route instance.
-The route will handle `/health` with default settings.
+The route instance created by calling `io.github.lhotari.akka.http.health.HealthEndpoint.createDefaultHealthRoute()` will handle `/health` with default settings.
+Append that route instance to the desired route binding.
+
+Because of security concerns, it is generally adviced to serve the health endpoint on a separate port that isn't exposed to the public.
 
 #### Advanced use
 
-For customization, use the trait `io.github.lhotari.akka.http.health.HealthEndpoint` and override protected methods.
+For customization, use the trait `io.github.lhotari.akka.http.health.HealthEndpoint` and override protected methods. Calling the `createHealthRoute()` method creates the route instance.
 
 ### Contributing
 
