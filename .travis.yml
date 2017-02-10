@@ -10,6 +10,12 @@ scala:
 jdk:
   - oraclejdk8
 
+env:
+  global:
+    - BINTRAY_USER=lhotari
+    - secure: aWkIXPu5vps1Iafpb0R8Cfm/cP+8aZrphZnTPdYckQMi+mCELt6GR0VDQ3UgMyvEi32ACBdW+qRpf4D9rM6/2B2XWQci/HUMRqpUK5XrteBjddH1kTtLuI/PHlU4Mv4RYyeLS8lUD4z67jMS/WjL0dTnVvtnGn2PpIHeqzj1Ns4ekOO+JnxDEUcB4V7fDVSwitye73YcEPkU/b1Fsvlk7ADzqUHaGCSVI9jnUugmTHztD4fneR3f/IXVnWaiMRtL9DwyTEb1rzoZdEnYbDzafo1C4L/YgF5uM9FqZV83fQG/v8Xbu0j/u+nv/U4BopHZIRpC1vSb7wWWG3tC/6tOFHBdtY5KwQIorXf9LIeiWEqChN32wC/d7h5k21cavNsY+AyEGi+rkQ/Q7kh7XMiodP+lP4zvpWvjt08Ga9z/hRkYIkEL5I8xn7W/oWJrOTMKEZdzhLkSFK2fMvTIKD00Hher6ZTBN7hD2i69hrplVSyFrjDojOA3tuVgk1c0Ras0bDZ/ebc8U9CErGNmC9Q/FSvOoQMCLzfSTyGb+y/rqiU4ghNf5M3YRWA4joI+IyqZ33MdAVYxCPdUHMqk9mG4I1r/JlBcaAoSKc0Baff0pRua9ftJF94KwaYMEkaWsC8CSODVQPTJespLRTdaDqxCYwVea3chqNHIAm2e95EO8Xc=
+
+
 # These directories are cached to S3 at the end of the build
 cache:
   directories:
@@ -23,3 +29,9 @@ before_cache:
 
 script:
   - sbt ++$TRAVIS_SCALA_VERSION test
+
+after_success:
+  - if [[ $TRAVIS_TAG =~ v[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+      sh "$TRAVIS_BUILD_DIR/travis/setup-travis-credentials.sh"
+      sbt ++$TRAVIS_SCALA_VERSION publish
+    fi
