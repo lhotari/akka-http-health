@@ -32,6 +32,6 @@ script:
 
 after_success:
   - if [[ $TRAVIS_TAG =~ v[0-9]+\.[0-9]+\.[0-9]+ ]]; then
-      sh "$TRAVIS_BUILD_DIR/travis/setup-travis-credentials.sh"
-      sbt ++$TRAVIS_SCALA_VERSION publish
+      sh "$TRAVIS_BUILD_DIR/travis/setup-travis-credentials.sh";
+      sbt ++$TRAVIS_SCALA_VERSION publish;
     fi
