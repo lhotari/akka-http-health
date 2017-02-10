@@ -41,13 +41,17 @@ trait HealthEndpoint {
   def createHealthRoute(implicit executor: ExecutionContext): Route =
     get {
       path("health") {
-        complete {
-          Future {
-            if (isHealthy()) successResponse else errorResponse
-          }
-        }
+        completeHealthCheck
       }
     }
+
+  def completeHealthCheck(implicit executor: ExecutionContext) = {
+    complete {
+      Future {
+        if (isHealthy()) successResponse else errorResponse
+      }
+    }
+  }
 
   def start(): Unit = {
     if (started.compareAndSet(false, true)) {
