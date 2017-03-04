@@ -38,9 +38,9 @@ trait HealthEndpoint {
 
   private val started = new AtomicBoolean(false)
 
-  def createHealthRoute(implicit executor: ExecutionContext): Route =
+  def createHealthRoute(endpoint: String)(implicit executor: ExecutionContext): Route =
     get {
-      path("health") {
+      path(endpoint) {
         completeHealthCheck
       }
     }
@@ -74,7 +74,7 @@ trait HealthEndpoint {
 object HealthEndpoint extends HealthEndpoint {
   lazy val defaultHealthChecker = new HealthEndpoint {}
 
-  def createDefaultHealthRoute()(implicit executor: ExecutionContext): Route = {
-    defaultHealthChecker.createHealthRoute
+  def createDefaultHealthRoute(endpoint: String = "health")(implicit executor: ExecutionContext): Route = {
+    defaultHealthChecker.createHealthRoute(endpoint)
   }
 }
