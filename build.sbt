@@ -11,7 +11,7 @@ crossScalaVersions := Seq("2.11.8", scalaVersion.value)
 scalacOptions := Seq("-unchecked", "-feature", "-deprecation", "-encoding", "utf8")
 
 libraryDependencies ++= {
-  val akkaHttpVersion = "10.0.3"
+  val akkaHttpVersion = "10.0.4"
   val scalaTestVersion = "3.0.1"
   val mockitoVersion = "1.10.19"
   Seq(
