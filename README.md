@@ -18,7 +18,7 @@ it could decide to destroy any unhealthy instances.
 sbt 0.13.6+
 ```
 resolvers += Resolver.bintrayRepo("lhotari","releases")
-libraryDependencies += "io.github.lhotari" %% "akka-http-health" % "1.0.3"
+libraryDependencies += "io.github.lhotari" %% "akka-http-health" % "1.0.4"
 ```
 
 #### Simple use
