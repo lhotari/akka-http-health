@@ -16,6 +16,7 @@ import akka.http.scaladsl.server.Route
 import scala.concurrent.{ExecutionContext, Future}
 
 trait HealthEndpoint {
+
   protected lazy val checkers = createCheckers
 
   protected def createCheckers = {
@@ -38,7 +39,7 @@ trait HealthEndpoint {
 
   private val started = new AtomicBoolean(false)
 
-  def createHealthRoute(endpoint: String)(implicit executor: ExecutionContext): Route =
+  def createHealthRoute(endpoint: String = HealthEndpoint.DefaultEndpoint)(implicit executor: ExecutionContext): Route =
     get {
       path(endpoint) {
         completeHealthCheck
@@ -74,7 +75,9 @@ trait HealthEndpoint {
 object HealthEndpoint extends HealthEndpoint {
   lazy val defaultHealthChecker = new HealthEndpoint {}
 
-  def createDefaultHealthRoute(endpoint: String = "health")(implicit executor: ExecutionContext): Route = {
+  val DefaultEndpoint: String = "health"
+
+  def createDefaultHealthRoute(endpoint: String = DefaultEndpoint)(implicit executor: ExecutionContext): Route = {
     defaultHealthChecker.createHealthRoute(endpoint)
   }
 }

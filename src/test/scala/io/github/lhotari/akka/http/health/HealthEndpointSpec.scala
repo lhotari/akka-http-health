@@ -23,14 +23,28 @@ class HealthEndpointSpec extends FunSpec with Matchers with ScalatestRouteTest w
   describe("health endpoint") {
     it("should complete successfully when all checks are ok") {
       checkers.foreach(checker => when(checker.isHealthy()).thenReturn(true))
-      Get("/health") ~> Route.seal(createHealthRoute) ~> check {
+      Get("/health") ~> Route.seal(createHealthRoute()) ~> check {
         status shouldEqual StatusCodes.OK
+      }
+    }
+
+    it("should complete successfully when a different endpoint is specified") {
+      checkers.foreach(checker => when(checker.isHealthy()).thenReturn(true))
+      Get("/another-endpoint") ~> Route.seal(createHealthRoute("another-endpoint")) ~> check {
+        status shouldEqual StatusCodes.OK
+      }
+    }
+
+    it("should return error when the wrong endpoint is specified") {
+      checkers.foreach(checker => when(checker.isHealthy()).thenReturn(true))
+      Get("/health") ~> Route.seal(createHealthRoute("another-endpoint")) ~> check {
+        status shouldEqual StatusCodes.NotFound
       }
     }
 
     it("should return error when a check fails") {
       when(mockChecker2.isHealthy()).thenReturn(false)
-      Get("/health") ~> Route.seal(createHealthRoute) ~> check {
+      Get("/health") ~> Route.seal(createHealthRoute()) ~> check {
         status shouldEqual StatusCodes.ServiceUnavailable
       }
     }
