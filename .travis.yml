@@ -15,6 +15,8 @@ env:
     - BINTRAY_USER=lhotari
     - secure: aWkIXPu5vps1Iafpb0R8Cfm/cP+8aZrphZnTPdYckQMi+mCELt6GR0VDQ3UgMyvEi32ACBdW+qRpf4D9rM6/2B2XWQci/HUMRqpUK5XrteBjddH1kTtLuI/PHlU4Mv4RYyeLS8lUD4z67jMS/WjL0dTnVvtnGn2PpIHeqzj1Ns4ekOO+JnxDEUcB4V7fDVSwitye73YcEPkU/b1Fsvlk7ADzqUHaGCSVI9jnUugmTHztD4fneR3f/IXVnWaiMRtL9DwyTEb1rzoZdEnYbDzafo1C4L/YgF5uM9FqZV83fQG/v8Xbu0j/u+nv/U4BopHZIRpC1vSb7wWWG3tC/6tOFHBdtY5KwQIorXf9LIeiWEqChN32wC/d7h5k21cavNsY+AyEGi+rkQ/Q7kh7XMiodP+lP4zvpWvjt08Ga9z/hRkYIkEL5I8xn7W/oWJrOTMKEZdzhLkSFK2fMvTIKD00Hher6ZTBN7hD2i69hrplVSyFrjDojOA3tuVgk1c0Ras0bDZ/ebc8U9CErGNmC9Q/FSvOoQMCLzfSTyGb+y/rqiU4ghNf5M3YRWA4joI+IyqZ33MdAVYxCPdUHMqk9mG4I1r/JlBcaAoSKc0Baff0pRua9ftJF94KwaYMEkaWsC8CSODVQPTJespLRTdaDqxCYwVea3chqNHIAm2e95EO8Xc=
     - secure: iqvgj6GEBnlFRwJYO2/fJ8BwM/4A377Qs7WQBjFbMSE/2D6x4jfG+7guDMS7VEK161nZhqNC1Qer6x7YESwiww2FH7GlKd4rrRQDeR37xTjPMW07r/ZYgaoz3BvndFHNki3yB3rh7vZ9srGtmnl+wsq2GPgkE+vPSQ5SFLkEBm/Y4AaApXi68uYyxRufyqMZUKxrlMmpu0eo7LEsLn4+QUmA4aF3BOkgXoLCBrufpLJKZIG/IYonNYYouj7X39q4NnjkAF+jQypZc3VhaZ31GLnC/oy2KRuxbCvJtS9hSOGeMbbgjvT19r5Vy14G+iFZiC0XLfStW8nj0lTBrf8As/rVCB94xkCJnHDNzKdPOHtD9bVRvM27gTxqXAf9hOAofHJynDeVqHXwTopEzSVxY7LdjD3x9zlzW51HdHA+kwe7DeaADpPlR/yuutXjssJ6dE91XWmX0YppzaP+Unf/BbGz7ow7sWdv2qaYHegAoHX/Y6VtXUp84i5eB4Cr4oXiJ6kFDnSsjlaYDkg0e6Oke5Z7M+zIfAWq2cX7idByeGdUvAPyMknLzB5OzvMn2HXmJ6xJjFRQpnDnMg/eR/Y9WDBxurcow0wTPmqTHN8+Wr9PUPHo8sbv59AWI29sXta9UJ+lo2FKIDtJ0ydmIsKTrxKxe6YjVMDs3maGWUdKu3s=
+    - SONATYPE_USER=lhotari
+    - secure: LBSCL6kIkQMbL6oPazmzmezYhhhGS/HC8djIxNbKC/+UcxdeVAGTcCfU3gqOzJA1JPnVSNTfjS0MXhPYkYKeCc6Z8dmy/3WTJvcP3gw+Erb9dVu/oB9tkAXdmtTXGS6vVdMOyJJoPVzkody/Qy2SJV9RFfNI+IekcO53Ynt+vqjJb6tKH8Bc+x3IgubRA8dp8cq0JcV7E84BG/bkaGCmS8pCDDtjdoS7xN3gFSO9pqQIQmzv2RcSqlpbdtcTz7ismFzReXFSepP8wgon2WL3JCqGyJyUwFWoxgtcah4movWZPOF7LDoMqxfVqvfCZ+b+CdiJ5P3NlM2zYtO1Tn5lUpYBbXBPn8Se9QncbcrJuxvJtkhT6mreA1ebmWAfWZjpjcritvhW11uaSjqrTewC0+voZhKKVRaohbg2U5u9e6uGtDx+gUZ5qqLngpPOXh2lib51LlxeV7u24LPcY0wDaI+a+If3gG8Kcu/PFErXspDLeTup5CH1+WJD2Ti6mgf4eVW+OR7QTAsSw5WGO2XgISBeTJ/X14XsPT4yYmkA9DBFiXK3/gjsrbDnqGo4k7MfaUORdhfNGjS/Di0bRd6jtrJa3bVKvRUnVXq9if47tQciFNIyGW2iAt+EZfC0L4NN4DNSl5JW9zk1lezC1DMvW6HFsFHYqsFALA2WAY4YNZw=
 
 # These directories are cached to S3 at the end of the build
 cache:
@@ -33,5 +35,5 @@ script:
 after_success:
   - if [[ $TRAVIS_TAG =~ v[0-9]+\.[0-9]+\.[0-9]+ ]]; then
       ./travis/setup-travis-credentials.sh;
-      sbt ++$TRAVIS_SCALA_VERSION publish && ./travis/sign-released-files.sh;
+      sbt ++$TRAVIS_SCALA_VERSION publish && ./travis/sign-released-files.sh && ./travis/sync-to-sonatype.sh;
     fi
