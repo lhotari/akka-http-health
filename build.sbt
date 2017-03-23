@@ -24,7 +24,25 @@ libraryDependencies ++= {
   )
 }
 
-licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
-publishArtifact in Test := false
 bintrayRepository := "releases"
 bintrayVcsUrl := Some("https://github.com/lhotari/akka-http-health")
+publishArtifact in Test := false
+
+// fullfil Sonatype OSS requirements for pom
+publishMavenStyle := true
+pomIncludeRepository := { x => false }
+licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
+homepage := Some(url("https://github.com/lhotari/akka-http-health"))
+pomExtra := (
+  <scm>
+    <url>https://github.com/lhotari/akka-http-health</url>
+    <connection>scm:git:https://github.com/lhotari/akka-http-health.git</connection>
+  </scm>
+  <developers>
+    <developer>
+      <id>lhotari</id>
+      <name>Lari Hotari</name>
+      <email>lari@hotari.net</email>
+    </developer>
+  </developers>
+)
