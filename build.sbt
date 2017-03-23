@@ -16,7 +16,7 @@ libraryDependencies ++= {
   val mockitoVersion = "1.10.19"
   Seq(
     "com.typesafe.akka" %% "akka-http" % akkaHttpVersion,
-    "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpVersion,
+    "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpVersion % "test",
     "org.scalatest" %% "scalatest" % scalaTestVersion % "test",
     "org.mockito" % "mockito-all" % mockitoVersion % "test",
     "com.google.guava" % "guava" % "21.0" % "test",
