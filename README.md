@@ -17,9 +17,11 @@ it could decide to destroy any unhealthy instances.
 
 sbt 0.13.6+
 ```
-resolvers += Resolver.bintrayRepo("lhotari","releases")
+resolvers += Resolver.jcenterRepo
 libraryDependencies += "io.github.lhotari" %% "akka-http-health" % "1.0.7"
 ```
+The library gets published on bintray/jcenter and synchronized from there to Sonatype OSS for staging to Maven central (starting since version `1.0.7`).
+It's recommended to use the jcenter repository since new releases will be available there instantly.
 
 #### Simple use
 
