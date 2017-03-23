@@ -2,7 +2,7 @@ name := "akka-http-health"
 
 organization := "io.github.lhotari"
 
-version := "1.0.5"
+version := "1.0.6"
 
 scalaVersion := "2.12.1"
 
