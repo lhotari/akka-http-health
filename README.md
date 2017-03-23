@@ -11,6 +11,8 @@ Provides a default `/health` endpoint that checks:
 A load balancer like AWS ELB can be configured to call the health endpoint and
 it could decide to destroy any unhealthy instances.
 
+This is not a metrics library. Please take a look at [Kamon](http://kamon.io) if you are looking for a metrics and tracing library that's well suited for akka-http applications. 
+
 ### Getting Started
 
 #### Adding the dependency
