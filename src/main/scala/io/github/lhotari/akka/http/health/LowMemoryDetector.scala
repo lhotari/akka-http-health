@@ -15,7 +15,7 @@ import javax.management.{Notification, NotificationBroadcaster, NotificationList
 
 import com.sun.management.GarbageCollectionNotificationInfo
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 
 /**
   * Detects low memory condition by using JMX API for consuming memory usage and garbage collection notification events.

@@ -18,8 +18,8 @@ import org.mockito.ArgumentCaptor
 import org.mockito.Matchers._
 import org.mockito.Mockito._
 import org.mockito.internal.stubbing.answers.Returns
-import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{FunSpec, Matchers}
+import org.scalatestplus.mockito.MockitoSugar
 import sun.management.MemoryNotifInfoCompositeData
 
 import scala.collection.JavaConverters._

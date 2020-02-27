@@ -10,8 +10,8 @@ package io.github.lhotari.akka.http.health
 import java.io.File
 
 import org.mockito.Mockito._
-import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{FunSpec, Matchers}
+import org.scalatestplus.mockito.MockitoSugar
 
 class LowDiskSpaceDetectorSpec extends FunSpec with MockitoSugar with Matchers with ProcessSpawner {
   describe("low diskspace detector") {
